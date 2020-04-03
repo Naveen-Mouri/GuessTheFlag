@@ -9,8 +9,23 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var showingAlert = false
     var body: some View {
-        Text("Hello, World!")
+        ZStack {
+            RadialGradient(gradient: Gradient(colors: [.yellow, .orange]), center: .center, startRadius: 20, endRadius: 200)
+            Button(action: {
+                self.showingAlert = true
+            }) {
+                HStack(spacing: 10) {
+                    Image(systemName: "pencil")
+                    Text("Tap me")
+                }
+            }
+            .alert(isPresented: $showingAlert) { () -> Alert in
+                Alert(title: Text("Hello SwiftUI!"), message: Text("This is some detail message"), dismissButton: .default(Text("OK")))
+            }
+//                .background(Color.blue)
+        }
     }
 }
 
